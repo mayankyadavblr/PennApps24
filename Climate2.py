@@ -25,6 +25,6 @@ def collect_weather(lat, long):
 
 
 if __name__ == '__main__':
-    temperature, precipitation = collect_weather(19.113798345335507, 72.87895812770725)
+    temperature, precipitation = collect_weather(40.427887497399716, -80.00927739563862)
 
     print(temperature, precipitation)

@@ -9,7 +9,8 @@ def Ph_of_soil():
 def main(lat, lang):
     temperature, precipitation = collect_weather(lat, lang)
     Ph =  Ph_of_soil()
-    
+    return temperature, Ph, precipitation
+
 
 if __name__ == '__main__':
-    main()
+    print(main(40.427887497399716, -80.00927739563862))

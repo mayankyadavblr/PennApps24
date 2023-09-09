@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
@@ -6,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the data
-data = pd.read_csv("Crop_recommendation.csv")
+data = pd.read_csv("Files/Crop_recommendation.csv")
 
 # Shuffle the dataset
 data = data.sample(frac=1, random_state=42).reset_index(drop=True)
@@ -15,7 +16,7 @@ data = data.sample(frac=1, random_state=42).reset_index(drop=True)
 print(data['label'].value_counts())
 
 # Split the data into training and testing sets
-X = data[['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall']]
+X = data[['temperature', 'humidity', 'ph', 'rainfall']]
 y = data['label']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 
@@ -35,6 +36,18 @@ y_pred = clf.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy on test set: {accuracy*100:.2f}%")
 
+# Real life predictions
+print('prediction ------------------------')
+answer = (clf.predict(np.array([20.891666666666666,83, 4.884999999999982, 107.5]).reshape(1, -1)))
+probs = clf.predict_proba(np.array([20.891666666666666,83, 4.884999999999982, 107.5]).reshape(1, -1))
+best_n = np.argsort(probs, axis=1)[:,-5:]
+print("-------------")
+print(answer)
+answer = clf.classes_[best_n][0]
+answer = list(answer)
+answer.reverse()
+print(answer)
+'''
 # Confusion Matrix
 conf_matrix = confusion_matrix(y_test, y_pred)
 plt.figure(figsize=(10, 8))
@@ -47,3 +60,4 @@ plt.show()
 feature_importances = clf.feature_importances_
 for feature, importance in zip(X.columns, feature_importances):
     print(f"{feature}: {importance:.4f}")
+'''
