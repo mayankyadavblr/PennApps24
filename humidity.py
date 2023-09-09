@@ -1,6 +1,7 @@
 import requests
 
-def get_humidity(latitude, longitude, api_key):
+def get_humidity(latitude, longitude):
+    api_key = "3aef63c856eeb24c8b3f980d307464d4" 
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
         "lat": latitude,
@@ -19,9 +20,9 @@ def get_humidity(latitude, longitude, api_key):
         return None
 
 # Example usage:
-api_key = "3aef63c856eeb24c8b3f980d307464d4" 
-latitude = 40.730610
-longitude = -73.935242
-humidity = get_humidity(latitude, longitude, api_key)
-if humidity is not None:
-    print(f"The humidity at the coordinates ({latitude}, {longitude}) is: {humidity}%")
+if __name__ == '__main__':
+  latitude = 40.730610
+  longitude = -73.935242
+  humidity = get_humidity(latitude, longitude)
+  if humidity is not None:
+      print(f"The humidity at the coordinates ({latitude}, {longitude}) is: {humidity}")

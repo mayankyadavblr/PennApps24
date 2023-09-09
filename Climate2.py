@@ -18,13 +18,13 @@ def collect_weather(lat, long):
     try:
         temp_avg = mean(data["tavg"])
         prcp_avg = sum(data["prcp"])
-        return temp_avg, prcp_avg
+        return temp_avg, prcp_avg/10
     except:
         print("No weather data found")
         return None, None
 
 
 if __name__ == '__main__':
-    temperature, precipitation = collect_weather(40.427887497399716, -80.00927739563862)
+    temperature, precipitation = collect_weather(41.06104324059672, -81.51734366383978)
 
     print(temperature, precipitation)

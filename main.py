@@ -1,6 +1,8 @@
 from Climate2 import *
 import random
 import numpy as np
+from humidity import *
+from Predict import *
 
 
 def Ph_of_soil():
@@ -9,7 +11,9 @@ def Ph_of_soil():
 def main(lat, lang):
     temperature, precipitation = collect_weather(lat, lang)
     Ph =  Ph_of_soil()
-    return temperature, Ph, precipitation
+    humidity = get_humidity(lat, lang)
+    return predict_crop(temperature, humidity, Ph, precipitation)
+
 
 
 if __name__ == '__main__':

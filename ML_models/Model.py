@@ -5,6 +5,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import GridSearchCV
+import numpy as np
+import pickle
 
 # Load the dataset
 df = pd.read_csv('Files/Crop_recommendation.csv')
@@ -13,7 +15,7 @@ df = pd.read_csv('Files/Crop_recommendation.csv')
 print(df['label'].value_counts())
 
 # Splitting data and labels
-X = df[['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall']]
+X = df[['temperature', 'humidity', 'ph', 'rainfall']]
 y = df['label']
 
 # Balance the dataset
@@ -57,6 +59,18 @@ grid_search.fit(X_train, y_train)
 
 best_svc = grid_search.best_estimator_
 y_pred_grid = best_svc.predict(X_test)
+
+
+print('prediction ------------------------')
+answer = (clf.predict(np.array([10.891666666666666, 80, 7.026999999999882, 107.95]).reshape(1, -1)))
+probs = clf.predict_proba(np.array([10.891666666666666, 80, 7.026999999999882, 107.95]).reshape(1, -1))
+best_n = np.argsort(probs, axis=1)[:,-5:]
+print("-------------")
+print(answer)
+answer = clf.classes_[best_n][0]
+answer = list(answer)
+answer.reverse()
+print(answer)
 
 print("Best SVM with Grid Search Results:")
 print(accuracy_score(y_test, y_pred_grid))
