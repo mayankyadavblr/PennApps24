@@ -10,8 +10,7 @@ response = requests.get(
   params={
     'lat': 58.7984,
     'lng': 17.8081,
-    'params': ','.join(['iron', 'nitrate','soilMoisture','soilMoisture10cm','soilMoisture40cm','soilMoisture100cm','soilTemperature','soilTemperature10cm','soilTemperature40cm',
-    'soilTemperature100cm']),
+    'params': ','.join(['iron', 'nitrate','soilMoisture', 'soilTemperature']),
     'start': start.to('UTC').timestamp(),  # Convert to UTC timestamp
     'end': end.to('UTC').timestamp(),      # Convert to UTC timestamp
   },
