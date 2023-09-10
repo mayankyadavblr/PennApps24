@@ -1,28 +1,31 @@
 import openai
 
-openai.api_key = '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'
+# Your OpenAI API Key
+API_KEY = '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'
+openai.api_key = API_KEY
 
+# Mock criteria for demonstration
 SOIL_TYPE = "loamy"
 CLIMATE = "temperate"
 
+# Define our mock crop database
 CROP_DATABASE = {
     "loamy": {
         "temperate": ["wheat", "barley", "potato"]
     },
+    # ... you can add more criteria and crops here
 }
 
-def recommend_crops(soil_type, climate):
-    return CROP_DATABASE.get(soil_type, {}).get(climate, [])
-
+# Query the LLM via OpenAI API for detailed instructions
 def get_growing_instructions(crop):
-    response = openai.Completion.create(
-      engine="davinci",
-      prompt=f"How to grow {crop}?",
-      max_tokens=150
-    )
-    
+    prompt = f"How to grow {crop}?"
+    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=150)
     instructions = response.choices[0].text.strip()
     return instructions
+
+# Recommend crops based on criteria
+def recommend_crops(soil_type, climate):
+    return CROP_DATABASE.get(soil_type, {}).get(climate, [])
 
 def main():
     recommended_crops = recommend_crops(SOIL_TYPE, CLIMATE)
@@ -35,6 +38,7 @@ def main():
     for crop in recommended_crops:
         print(f"- {crop}")
     
+    # Now, get growing instructions from LLM
     for crop in recommended_crops:
         instructions = get_growing_instructions(crop)
         print(f"\nGrowing {crop}:")
