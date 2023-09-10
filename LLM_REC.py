@@ -1,7 +1,7 @@
 import openai
 
 # Your OpenAI API Key
-API_KEY = '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'
+API_KEY = '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'
 openai.api_key = API_KEY
 
 # Mock criteria for demonstration
@@ -40,10 +40,10 @@ def main_howto(commodities):
         print(f"- {crop}")
     
     # Now, get growing instructions from LLM
+    returnInstructions = {}
     for crop in recommended_crops:
         instructions = get_growing_instructions(crop)
-        print(f"\nGrowing {crop}:")
-        print(instructions)
-
+        returnInstructions[crop] = instructions
+    return returnInstructions
 if __name__ == "__main__":
-    main_howto(["wheat", "barley", "potato"])
+   print( main_howto(["wheat", "barley", "potato"]))

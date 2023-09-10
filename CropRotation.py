@@ -1,7 +1,7 @@
 import openai
 
 # Your OpenAI API Key
-API_KEY = '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'
+API_KEY = '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'
 openai.api_key = API_KEY
 
 # Mock crop database for demonstration
@@ -21,7 +21,7 @@ def main_rotation(CROP_ROTATION_LIST):
 
     rotation_table = get_crop_rotation(CROP_ROTATION_LIST)
     print("\nCrop Rotation Table:")
-    print(rotation_table)
+    return rotation_table
 
 if __name__ == "__main__":
     main_rotation()

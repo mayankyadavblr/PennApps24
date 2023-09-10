@@ -25,9 +25,12 @@ def main(lat, lang):
     sorted_dict = {keys[i]: values[i] for i in sorted_value_index}
     print(sorted_dict)
 
-    (main_rotation(list(sorted_dict.keys())))
-    main_howto(sorted_dict)
-
+    output_json = {}
+    output_json["rotationTxt"] = main_rotation(list(sorted_dict.keys()))
+    print(output_json["rotationTxt"])
+    add_data = main_howto(sorted_dict)
+    print(add_data)
+    output_json["cropSpecific"] = add_data
 
 if __name__ == '__main__':
     (main(33.44193097647909, -112.07110698105588))
