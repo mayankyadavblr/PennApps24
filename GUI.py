@@ -1,6 +1,7 @@
 from tkinter import *
 from main import *
 from tkintermapview import TkinterMapView
+from Twilio import *
 
 def raise_frame(frame):
     frame.tkraise()
@@ -28,12 +29,20 @@ label2 = Label(home, text="Enter coordinates: latitude, longitude").grid(row=1, 
 map_view = TkinterMapView(home, width=600, height=400)
 map_view.grid(row=2, column=0, padx=10, pady=10)
 
-Button(home, text="Submit", command=lambda:submit_home()).grid(row=3, column=0, padx=10, pady=10)
+phno = Entry(home)
+phno.grid(row=3, column=0, padx=10, pady=10)
+var1 = IntVar()
+c1 = Checkbutton(home, text='Get Updates',variable=var1, onvalue=1, offvalue=0)
+c1.grid(row=3, column=1, padx=10, pady=10)
+
+Button(home, text="Submit", command=lambda:submit_home()).grid(row=4, column=0, padx=10, pady=10)
 
 def submit_home():
     coordinate = coordinates.get().split(" ")
     json = main(float(coordinate[0]), float(coordinate[1]))
-    
+    if var1.get()==1:
+        print('in here')
+        main_messaging(float(coordinate[0]), float(coordinate[1]), phno.get())    
     raise_frame(result)
     print(json)
     coordinates.delete(0, END)

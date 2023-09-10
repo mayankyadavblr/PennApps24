@@ -1,7 +1,7 @@
 import openai
 
 # Your OpenAI API Key
-API_KEY = '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'
+API_KEY = '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'
 openai.api_key = API_KEY
 
 # Mock criteria for demonstration

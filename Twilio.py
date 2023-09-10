@@ -25,9 +25,9 @@ def collect_weather(lat, long):
         print("No weather data found")
         return None, None
 
-def send_sms(message_body):
+def send_sms(message_body, to_phno):
     account_sid = 'ACa1724f4ca98de87b1ed387eec79e157d'
-    auth_token = 'd3c67ebb320d8d253661546144e0fe0c'
+    auth_token = 'a6c361f875a5aae76d112f0a2db09810'
     
     client = Client(account_sid, auth_token)
 
@@ -35,15 +35,15 @@ def send_sms(message_body):
                 .create(
                      body=message_body,
                      from_='+18335095612',
-                     to='+16504715598'
+                     to=to_phno
                  )
     print(message.sid)
 
-if __name__ == '__main__':
-    temperature, precipitation = collect_weather(19.113798345335507, 72.87895812770725)
+def main_messaging(lat, long, to_phno):
+    temperature, precipitation = collect_weather(lat, long)
     
     if temperature and precipitation:
         message_body = f'Average Temperature for today: {temperature:.2f}°C\nTotal Precipitation for today: {precipitation:.2f}mm'
-        send_sms(message_body)
+        send_sms(message_body, to_phno)
     else:
         print("Failed to fetch weather data.")
