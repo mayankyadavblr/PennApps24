@@ -4,6 +4,7 @@ import numpy as np
 from humidity import *
 from Predict import *
 from sort_by_price import *
+from CropRotation import *
 
 
 def Ph_of_soil():
@@ -22,6 +23,9 @@ def main(lat, lang):
     sorted_value_index = np.argsort(values)
     sorted_dict = {keys[i]: values[i] for i in sorted_value_index}
     print(sorted_dict)
+
+    print(main_rotation(list(sorted_dict.keys())))
+
 
 if __name__ == '__main__':
     print(main(33.44193097647909, -112.07110698105588))
