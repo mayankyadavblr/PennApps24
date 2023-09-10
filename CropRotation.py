@@ -1,7 +1,7 @@
 import openai
 
 # Your OpenAI API Key
-API_KEY = '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'
+API_KEY = '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'
 openai.api_key = API_KEY
 
 # Mock crop database for demonstration

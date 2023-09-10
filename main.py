@@ -6,12 +6,16 @@ from Predict import *
 from sort_by_price import *
 from CropRotation import *
 from LLM_REC import*
+from flask import Flask
 
+app = Flask(__name__)
 
 def Ph_of_soil():
     return random.choice(np.arange(4.5, 8.5, 0.007)) 
 
-def main(lat, lang):
+@app.route("/")
+def main():
+    lat, lang = 33.44193097647909, -112.07110698105588
     temperature, precipitation = collect_weather(lat, lang)
     Ph =  Ph_of_soil()
     humidity = get_humidity(lat, lang)
@@ -32,5 +36,7 @@ def main(lat, lang):
     print(add_data)
     output_json["cropSpecific"] = add_data
 
+    return output_json
 if __name__ == '__main__':
-    (main(33.44193097647909, -112.07110698105588))
+    app.run(debug=True)
+    #(main(33.44193097647909, -112.07110698105588))
