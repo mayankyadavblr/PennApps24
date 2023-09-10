@@ -1,11 +1,12 @@
 from tkinter import *
 from main import *
+from tkintermapview import TkinterMapView
 
 def raise_frame(frame):
     frame.tkraise()
 
 root = Tk()
-root.geometry("400x300")
+root.geometry("850x600")
 
 home = Frame(root)
 result = Frame(root)
@@ -24,10 +25,13 @@ coordinates.grid(row=1, column=0, padx=10, pady=10)
 
 label2 = Label(home, text="Enter coordinates: latitude, longitude").grid(row=1, column=1, padx=5, pady=10)
 
-Button(home, text="Submit", command=lambda:submit_home()).grid(row=2, column=0, padx=10, pady=10)
+map_view = TkinterMapView(home, width=600, height=400)
+map_view.grid(row=2, column=0, padx=10, pady=10)
+
+Button(home, text="Submit", command=lambda:submit_home()).grid(row=3, column=0, padx=10, pady=10)
 
 def submit_home():
-    coordinate = coordinates.get().split(", ")
+    coordinate = coordinates.get().split(" ")
     json = main(float(coordinate[0]), float(coordinate[1]))
     
     raise_frame(result)

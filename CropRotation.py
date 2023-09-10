@@ -1,7 +1,7 @@
 import openai
 
 # Your OpenAI API Key
-API_KEY = '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'
+API_KEY = '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'
 openai.api_key = API_KEY
 
 # Mock crop database for demonstration
@@ -9,7 +9,7 @@ openai.api_key = API_KEY
 # Query the LLM via OpenAI API for crop rotation table
 def get_crop_rotation(crops):
     prompt = "what is the best crop rotation method that should be used with {}, {}, {}, and {} in each year? " \
-             "make it into a table format with one of the columns as the seasons, make distinct rows and columns. Just give the table followed by a small explanation of why it works " \
+             "make it into a table format with one of the columns as the seasons, make rows and columns with - and | so that it is properly formatted. Just give the table followed by a small explanation of why it works " \
              "Prioritize first crop in the list since it will earn more money".format(crops[3], crops[2], crops[1], crops[0])
     response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=300)
     return response.choices[0].text.strip()
