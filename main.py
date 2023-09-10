@@ -5,6 +5,7 @@ from humidity import *
 from Predict import *
 from sort_by_price import *
 from CropRotation import *
+from LLM_REC import*
 
 
 def Ph_of_soil():
@@ -24,8 +25,9 @@ def main(lat, lang):
     sorted_dict = {keys[i]: values[i] for i in sorted_value_index}
     print(sorted_dict)
 
-    print(main_rotation(list(sorted_dict.keys())))
+    (main_rotation(list(sorted_dict.keys())))
+    main_howto(sorted_dict)
 
 
 if __name__ == '__main__':
-    print(main(33.44193097647909, -112.07110698105588))
+    (main(33.44193097647909, -112.07110698105588))
