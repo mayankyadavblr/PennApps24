@@ -3,6 +3,7 @@ import random
 import numpy as np
 from humidity import *
 from Predict import *
+from sort_by_price import *
 
 
 def Ph_of_soil():
@@ -12,7 +13,8 @@ def main(lat, lang):
     temperature, precipitation = collect_weather(lat, lang)
     Ph =  Ph_of_soil()
     humidity = get_humidity(lat, lang)
-    return predict_crop(temperature, humidity, Ph, precipitation)
+    commodities = predict_crop(temperature, humidity, Ph, precipitation)
+    prices = control(lat, lang, commodities)
 
 
 

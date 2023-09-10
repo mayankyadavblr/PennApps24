@@ -1,5 +1,6 @@
 from RegionClassifier import *
 import pandas as pd
+from statistics import mean
 
 
 def control(lat, long, commodities):
@@ -9,10 +10,22 @@ def control(lat, long, commodities):
     region = get_region(lat, long)
 
     mask = df["region"].isin([region, "National"])
-    rows = df[mask]
+    df = df[mask]
 
-    mask = rows["commodity"].isin(commodities)
-    rows = rows[mask]
-    print(rows[["commodity", "region", "wtd avg price"]])
+    mask = df["commodity"].isin(commodities)
+    df = df[mask]
+    print(df[["commodity", "region", "wtd avg price"]])
 
-control(41.06104324059672, -81.51734366383978, ["Carrots", "orange", "watermelon"])
+    prices = {}
+    for commodity in commodities:
+        mask = df["commodity"].isin([commodity])
+        rows = df[mask]
+        try:
+            prices[commodity] = mean(rows["wtd avg price"])
+        except:
+            prices[commodity] = -1
+    return prices
+
+if __name__ == '__main__':
+    answer = control(41.06104324059672, -81.51734366383978, ["Carrots", "orange", "watermelon"])
+    print(answer)
