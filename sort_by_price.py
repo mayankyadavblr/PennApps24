@@ -12,6 +12,8 @@ def control(lat, long, commodities):
     mask = df["region"].isin([region, "National"])
     df = df[mask]
 
+    print(df[["commodity", "region"]])
+
     mask = df["commodity"].isin(commodities)
     df = df[mask]
     print(df[["commodity", "region", "wtd avg price"]])
@@ -20,6 +22,7 @@ def control(lat, long, commodities):
     for commodity in commodities:
         mask = df["commodity"].isin([commodity])
         rows = df[mask]
+        print(commodity, rows)
         try:
             prices[commodity] = mean(rows["wtd avg price"])
         except:

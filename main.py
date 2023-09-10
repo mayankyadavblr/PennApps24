@@ -14,9 +14,14 @@ def main(lat, lang):
     Ph =  Ph_of_soil()
     humidity = get_humidity(lat, lang)
     commodities = predict_crop(temperature, humidity, Ph, precipitation)
+    print(commodities)
     prices = control(lat, lang, commodities)
-
-
+    print(prices)
+    keys = list(prices.keys())
+    values = list(prices.values())
+    sorted_value_index = np.argsort(values)
+    sorted_dict = {keys[i]: values[i] for i in sorted_value_index}
+    print(sorted_dict)
 
 if __name__ == '__main__':
-    print(main(40.427887497399716, -80.00927739563862))
+    print(main(33.44193097647909, -112.07110698105588))

@@ -13,5 +13,5 @@ def predict_crop(temeperature, humidity, ph, rainfall):
     answer = clf.classes_[best_n][0]
     answer = list(answer)
     answer.reverse()
-    print(answer)
+    return answer
 
