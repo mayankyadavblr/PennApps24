@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import time
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 def main_rotation(crops):
 
@@ -20,11 +20,12 @@ def get_completion(prompt, model="ada"):
 
     response = openai.ChatCompletion.create(
 
-    model=model,
-
-    messages=messages,
-
-    temperature=0,
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=1024,
+        n=1,
+        stop=None,
+        temperature=0.5,
 
     )
 

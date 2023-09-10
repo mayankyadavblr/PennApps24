@@ -7,7 +7,7 @@ def predict_crop(temeperature, humidity, ph, rainfall):
     # Real life predictions
     answer = (clf.predict(np.array([temeperature, humidity, ph, rainfall]).reshape(1, -1)))
     probs = clf.predict_proba(np.array([temeperature, humidity, ph, rainfall]).reshape(1, -1))
-    best_n = np.argsort(probs, axis=1)[:,-5:]
+    best_n = np.argsort(probs, axis=1)[:,-4:]
     print("-------------")
     print(answer)
     answer = clf.classes_[best_n][0]
